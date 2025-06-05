@@ -1,12 +1,21 @@
 import Image from "next/image";
-import { Geist, Geist_Mono } from "next/font/google";
 import { motion } from "framer-motion";
 import Button from "@/components/shared/Button";
 import CustomImage from "@/assets/images/aboutUs.jpeg";
 import Card from "@/components/shared/Card";
 import { Rocket, BarChart, ShieldCheck } from "lucide-react";
+import useFetch from "@/hooks/useFetch";
+
+export interface Post {
+  id: string;
+  title: string;
+  body: string;
+}
 
 const Home = () => {
+  const {data: initialPosts, loading} = useFetch<Post[]>(
+    'https://jsonplaceholder.typicode.com/posts'
+  );
   return (
     <div className="pt-14">
       <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
