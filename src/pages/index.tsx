@@ -7,7 +7,6 @@ import { Rocket, BarChart, ShieldCheck } from "lucide-react";
 import useFetch from "@/hooks/useFetch";
 import { use, useEffect, useState } from "react";
 import { CircularProgress } from "@mui/material";
-import { h } from "framer-motion/dist/types.d-B50aGbjN";
 
 export interface Post {
   id: string;
