@@ -21,6 +21,11 @@ export function Header() {
         {
             name: "Blogs",
             pathName: "/blogs",
+        },
+
+        {
+            name: "News",
+            pathName: "/news",
         }
     ];
     return (
