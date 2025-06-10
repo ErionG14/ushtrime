@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   env: {
     MONGODB_URI:"mongodb+srv://dev-api:23Ew9LubnV8QYUzu@myapplication.apjhfmg.mongodb.net",
+    NEXTAUTH_SECRET:"6twQsXK9GNklzxlEK6f/9mnpcHF6nqLyTBE1ASgPAwU="
   },
 };
 
