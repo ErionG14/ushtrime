@@ -26,3 +26,5 @@ export const useNewsContext = () => {
     }
     return context;
 };
+
+export type { News };
