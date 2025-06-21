@@ -3,10 +3,10 @@ import { motion } from "framer-motion";
 import Button from "@/components/shared/Button";
 import CustomImage from "@/assets/images/aboutUs.jpeg";
 import Card from "@/components/shared/Card";
-import { Rocket, BarChart, ShieldCheck } from "lucide-react";
+import { Rocket, BarChart, ShieldCheck, Trash } from "lucide-react";
 import useFetch from "@/hooks/useFetch";
 import { use, useEffect, useState } from "react";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, IconButton, Tooltip } from "@mui/material";
 
 export interface Post {
   id: string;
@@ -31,19 +31,18 @@ const Home = () => {
     }
   }
   return (
-    <div className="pt-14">
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+    <div className="pt-14 bg-gradient-to-b from-purple-50 to-purple-100 min-h-screen">
         {/* Hero Section */}
         <motion.section
-          className="w-full py-20 bg-yellow-600 text-black text-center"
+          className="w-full py-20 bg-purple-700 text-white text-center px-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
         >
-          <h1 className="text-5x1 font-bold mb-4">
+          <h1 className="text-5x1 text-primary font-extrabold mb-4">
             Mire se Vini ne Aplikacionin Tone!
           </h1>
-          <p className="text-xl mb-4">
+          <p className="text-xl mb-6">
             Ndertoni aplikacione te fuqishme dhe te shpejta me Next.js
           </p>
           <Button
@@ -55,12 +54,12 @@ const Home = () => {
 
         {/* About Section */}
         <motion.section
-          className="max-w-6xl py-20 px-6 text-center"
+          className="max-w-6xl mx-auto py-20 px-6 text-center"
           initial={{ x: -100 }}
           animate={{ x: 0 }}
           transition={{ duration: 1 }}
         >
-          <h2 className="text-4xl font-bold mb-6 text-yellow-600">
+          <h2 className="text-4xl font-bold mb-6 text-purple-700">
             Rreth Nesh
           </h2>
           <p className="text-gray-700 mb-6">
@@ -73,18 +72,18 @@ const Home = () => {
             alt="About Us"
             width={500}
             height={300}
-            className="rounded-xl"
+            className="rounded-xl shadow-lg mx-auto"
           />
         </motion.section>
         {/* Features Section */}
         <motion.section
-          className="w-full py-20 bg-gray-200 text-center"
+          className="w-full py-20 bg-white text-center"
           initial={{ y: 100 }}
           animate={{ y: 0 }}
           transition={{ duration: 1 }}
         >
-          <div className="container m-auto">
-            <h2 className="text-4xl font-bold mb-6 text-yellow-600">
+          <div className="container m-auto px-6">
+            <h2 className="text-4xl font-bold mb-6 text-purple-700">
               Karakteristikat Kryesore
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -108,12 +107,12 @@ const Home = () => {
         </motion.section>
         {/* Services Section */}
         <motion.section
-          className="max-w-6xl py-20 px-6 text-center"
+          className="max-w-6xl mx-auto py-20 px-6 text-center"
           initial={{ scale: 0.8 }}
           animate={{ scale: 1 }}
           transition={{ duration: 1 }}
         >
-          <h2 className="text-4xl font-bold mb-6 text-yellow-600">
+          <h2 className="text-4xl font-bold mb-6 text-purple-700">
             Shërbimet tona
           </h2>
           <p className="text-gray-700 mb-6">
@@ -126,7 +125,7 @@ const Home = () => {
           />
         </motion.section>
         {/* Blog Section */}
-        <div className="grid grid-cols-3 py-20 bg-gray-200">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 py-20 px-6 bg-purple-50">
           {loading ?
           <CircularProgress/> 
           
@@ -135,19 +134,22 @@ const Home = () => {
           {posts && posts.map((post) => (
             <motion.section
               key={post.id}
-              className="max-w-6xl py-20 px-6 text-center"
+              className="bg-white p-6 rounded-lg shadow-md text-left flex flex-col"
               initial={{ scale: 0.8 }}
               animate={{ scale: 1 }}
               transition={{ duration: 1 }}
             >
-              <h3 className="text-4xl font-bold mb-6 text-yellow-600 line-clamp-2 uppercase">
+              <h3 className="text-2xl font-bold text-purple-700 line-clamp-2 mb-2">
                 {post.title}
                 </h3>
-              <p className="text-gray-700 mb-6">{post.body}</p>
-              <button onClick={handleDelete.bind(null, post.id)}
-              className="px-6 py-2 bg-red-600 text-white rounded-xl hover:bg-red-700 transistion">
-                Fshij Postin
-                </button>
+              <p className="text-gray-600 mb-4 flex-1">{post.body}</p>
+              <div className="flex items-end justify-end">
+                <Tooltip title="Fshij Postin">
+                  <IconButton onClick={() => handleDelete(post.id)}>
+                  <Trash className="text-gray-400" />
+                  </IconButton>
+                </Tooltip>
+              </div>
             </motion.section>
           ))}
           </>
@@ -155,15 +157,15 @@ const Home = () => {
         </div>
         {/* Contact Section */}
         <motion.section
-          className="w-full py-20 bg-yellow-600 text-black text-center"
+          className="w-full py-20 bg-purple-700 text-white text-center px-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
         >
           <h2 className="text-4xl font-bold mb-6">Na Kontaktoni</h2>
-          <p>E-mail: concact@mycompany.com</p>
-          <p>Tel: +383 123 456 789</p>
-          <p className="mb-4">Adresa: Prishtinë, Kosovë</p>
+          <p className="mb-1">E-mail: concact@mycompany.com</p>
+          <p className="mb-1">Tel: +383 123 456 789</p>
+          <p className="mb-6">Adresa: Prishtinë, Kosovë</p>
           <Button
             text="Na Kontaktoni"
             variant="secondary"
@@ -171,7 +173,6 @@ const Home = () => {
           />
         </motion.section>
       </div>
-    </div>
   );
 };
 Home.displayName = "My Application";
